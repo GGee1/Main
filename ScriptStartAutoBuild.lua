@@ -27,6 +27,13 @@ function placeBlock(blockData)
                 [2] = blockData.color -- Cor do bloco
             }
             game:GetService("ReplicatedStorage").PaintBlock:FireServer(unpack(argsColor))
+                                               function getBlockByType(blockType)
+    for _, block in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if block.Name == blockType then
+            return block
+                 end
+             end
+           return nil
         end
     end
 end
