@@ -1,3 +1,14 @@
+-- Função que escolhe o bloco correto
+function getBlockByType(blockType)
+    for _, block in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if block.Name == blockType then
+            return block
+        end
+    end
+    return nil -- Caso o bloco não seja encontrado
+end
+
+-- Função que coloca, escala e pinta o bloco
 function placeBlock(blockData)
     local character = game.Players.LocalPlayer.Character
     local humanoid = character:FindFirstChild("Humanoid")
@@ -27,14 +38,17 @@ function placeBlock(blockData)
                 [2] = blockData.color -- Cor do bloco
             }
             game:GetService("ReplicatedStorage").PaintBlock:FireServer(unpack(argsColor))
-                                               function getBlockByType(blockType)
-    for _, block in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-        if block.Name == blockType then
-            return block
-                 end
-             end
-           return nil
         end
     end
-build()
 end
+
+-- Função que percorre toda a planta baixa e constroi, escala e pinta os blocos
+function build()
+    for _, blockData in ipairs(blueprint) do
+        placeBlock(blockData)
+        wait(0.5) -- Pequeno delay para cada bloco
+    end
+end
+
+-- Iniciar a construção
+build()
