@@ -36,4 +36,5 @@ function placeBlock(blockData)
            return nil
         end
     end
+build()
 end
